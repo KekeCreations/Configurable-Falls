@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.kekecreations.configurable_falls.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "configurable_falls.refmap.json",
+  "mixins" : [
+    "EntityMixin",
+    "HayBlockMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
