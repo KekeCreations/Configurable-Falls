@@ -2,10 +2,12 @@ package com.kekecreations.configurable_falls.events;
 
 import com.kekecreations.configurable_falls.ConfigurableFalls;
 import com.kekecreations.configurable_falls.config.ConfigurableFallsCommonConfigs;
+import com.kekecreations.configurable_falls.util.ConfigurableFallsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.*;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -44,10 +46,16 @@ public class KekeFallEvent {
             entity.level().destroyBlock(layerPos, ConfigurableFallsCommonConfigs.GRASS_BREAK_ON_FALL_DROPS.get(), entity);
         }
         if (entity.fallDistance >= ConfigurableFallsCommonConfigs.GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.GRASS_TURNS_TO_DIRT_ON_FALL.get() && entity.level().getBlockState(blockPos).getBlock() == Blocks.GRASS_BLOCK) {
-            entity.level().setBlock(blockPos, Blocks.DIRT.defaultBlockState(), 1);
+            entity.level().setBlock(blockPos, Blocks.DIRT.defaultBlockState(), 3);
         }
         if (entity.fallDistance >= ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).getBlock() == Blocks.TALL_GRASS) {
             entity.level().destroyBlock(layerPos, ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_DROPS.get(), entity);
+        }
+
+
+        //TAGS
+        if (entity.fallDistance >= ConfigurableFallsCommonConfigs.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.FRAGILE)) {
+            entity.level().destroyBlock(blockPos, ConfigurableFallsCommonConfigs.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS.get(), entity);
         }
     }
 }

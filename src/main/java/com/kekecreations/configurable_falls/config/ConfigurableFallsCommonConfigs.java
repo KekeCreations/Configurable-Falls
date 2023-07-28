@@ -39,35 +39,44 @@ public class ConfigurableFallsCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Float> TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Float> HAY_BALE_FALL_DAMAGE_PERCENTAGE;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS;
+    public static final ForgeConfigSpec.ConfigValue<Float> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE;
+
 
     static {
         BUILDER.push("Config for Configurable Falls");
 
         WATER_FALL_DAMAGE_FALL_DISTANCE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("Required fall distance for entities to take fall damage in Water! Mod Default : 2.2")
                 .define("Water Fall Damage Required Fall Distance", 2.2F);
 
         WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 1 block deep water!")
                 .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .define("1 Block Deep Water Fall Damage Percentage", 1F);
 
         WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 2 block deep water!")
                 .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .define("2 Block Deep Water Fall Damage Percentages", 0.5F);
 
         WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 3 block deep water!")
                 .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .define("3 Block Deep Water Fall Damage Percentages", 0F);
 
         WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 4 block deep water!")
                 .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .define("4 Block Deep Water Fall Damage Percentages", 0F);
 
         WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE = BUILDER
+                .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 5 block deep water and more!")
                 .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .define("5 Block Deep Water Fall Damage Percentages", 0F);
@@ -135,6 +144,13 @@ public class ConfigurableFallsCommonConfigs {
         TALL_GRASS_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Tall Grass have a chance to drop seeds when broken by entities falling on it? Mod Default : true  *Requires Tall Grass Break On Fall to be set to true")
                 .define("Tall Grass Has A Chance To Drop Seeds When Broken By Entities Falling On It", true);
+
+        CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for Blocks that have the #fragile tag to break on fall, Jumping of 1 block = 2.1")
+                .define("Blocks With #fragile Required Fall Distance For Block To Break", 2.2F);
+        CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS = BUILDER
+                .comment("Should Blocks that have the #fragile tag drop their block drops Mod Default : true ")
+                .define("Blocks With #fragile tag drop loot", true);
 
 
 
