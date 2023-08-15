@@ -5,42 +5,52 @@ public class ConfigurableFallsCommonConfigs {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_FALL_DAMAGE_FALL_DISTANCE;
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_FALL_DAMAGE_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE;
 
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE;
 
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE;
 
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE;
 
-    public static final ForgeConfigSpec.ConfigValue<Float> WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> ICE_BREAK_ON_FALL;
-    public static final ForgeConfigSpec.ConfigValue<Float> ICE_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> ICE_BREAK_ON_FALL_FALL_DISTANCE;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> SUS_BLOCKS_BREAK_ON_FALL;
+    public static final ForgeConfigSpec.ConfigValue<Double> SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> MELON_EXPLODE_INTO_SLICES_ON_FALL;
+    public static final ForgeConfigSpec.ConfigValue<Double> MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> GLASS_BREAK_ON_FALL;
-    public static final ForgeConfigSpec.ConfigValue<Float> GLASS_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> GLASS_BREAK_ON_FALL_FALL_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> GLASS_BREAK_ON_FALL_DROPS;
     public static final ForgeConfigSpec.ConfigValue<Boolean> GLASS_PANE_BREAK_ON_FALL;
-    public static final ForgeConfigSpec.ConfigValue<Float> GLASS_PANE_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> GLASS_PANE_BREAK_ON_FALL_FALL_DISTANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> SNOW_BREAK_ON_FALL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> SNOW_BREAK_ON_FALL_DROPS;
-    public static final ForgeConfigSpec.ConfigValue<Float> SNOW_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> SNOW_BREAK_ON_FALL_FALL_DISTANCE;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> LEAVES_BREAK_ON_FALL;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> LEAVES_BREAK_ON_FALL_DROPS;
+    public static final ForgeConfigSpec.ConfigValue<Double> LEAVES_BREAK_ON_FALL_FALL_DISTANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> GRASS_BREAK_ON_FALL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> GRASS_BREAK_ON_FALL_DROPS;
-    public static final ForgeConfigSpec.ConfigValue<Float> GRASS_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> GRASS_BREAK_ON_FALL_FALL_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> GRASS_TURNS_TO_DIRT_ON_FALL;
-    public static final ForgeConfigSpec.ConfigValue<Float> GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> TALL_GRASS_BREAK_ON_FALL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> TALL_GRASS_BREAK_ON_FALL_DROPS;
-    public static final ForgeConfigSpec.ConfigValue<Float> TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE;
-    public static final ForgeConfigSpec.ConfigValue<Float> HAY_BALE_FALL_DAMAGE_PERCENTAGE;
+    public static final ForgeConfigSpec.ConfigValue<Double> TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> HAY_BALE_FALL_DAMAGE_PERCENTAGE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS;
-    public static final ForgeConfigSpec.ConfigValue<Float> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE;
 
 
     static {
@@ -49,37 +59,37 @@ public class ConfigurableFallsCommonConfigs {
         WATER_FALL_DAMAGE_FALL_DISTANCE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("Required fall distance for entities to take fall damage in Water! Mod Default : 2.2")
-                .define("Water Fall Damage Required Fall Distance", 2.2F);
+                .defineInRange("Water Fall Damage Required Fall Distance", 2.2, 0.0, 64.0);
 
         WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 1 block deep water!")
-                .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
-                .define("1 Block Deep Water Fall Damage Percentage", 1F);
+                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .defineInRange("1 Block Deep Water Fall Damage Percentage", 1.0, 0.0, 1.0);
 
         WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 2 block deep water!")
-                .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
-                .define("2 Block Deep Water Fall Damage Percentages", 0.5F);
+                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .defineInRange("2 Block Deep Water Fall Damage Percentages", 0.5, 0.0, 1.0);
 
         WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 3 block deep water!")
-                .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
-                .define("3 Block Deep Water Fall Damage Percentages", 0F);
+                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .defineInRange("3 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
         WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 4 block deep water!")
-                .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
-                .define("4 Block Deep Water Fall Damage Percentages", 0F);
+                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .defineInRange("4 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
         WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE = BUILDER
                 .comment("USES VANILLA WATER TAG")
                 .comment("How much fall damage entities will take in 5 block deep water and more!")
-                .comment("Value explanation : Only pick values from 0 to 1.  1 = 100% Fall Damage, 0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
-                .define("5 Block Deep Water Fall Damage Percentages", 0F);
+                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .defineInRange("5 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
 
         ICE_BREAK_ON_FALL = BUILDER
@@ -87,14 +97,14 @@ public class ConfigurableFallsCommonConfigs {
                 .define("Ice Break On Fall", true);
         ICE_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for ice to break on fall if Ice Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Ice Break Fall Distance", 2.2F);
+                .defineInRange("Ice Break Fall Distance", 2.2, 0.0, 64.0);
 
         SNOW_BREAK_ON_FALL = BUILDER
                 .comment("Should Snow Break When fallen on?  Vanilla : false   Mod Default : true")
                 .define("Snow Break On Fall", true);
         SNOW_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Snow to break on fall if Snow Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Snow Break Fall Distance", 2.2F);
+                .defineInRange("Snow Break Fall Distance", 2.2, 0.0, 64.0);
         SNOW_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Snow drop snowballs when broken by entities falling on it? Mod Default : false  *Requires Snow Break On Fall to be set to true")
                 .define("Snow Drops Snowballs When Broken By Entities Falling On It", false);
@@ -107,17 +117,17 @@ public class ConfigurableFallsCommonConfigs {
                 .define("Tinted Glass Drops Tinted Glass When Broken By Entities Falling On It", true);
         GLASS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for glass to break on fall if Glass Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Glass Break Fall Distance", 2.2F);
+                .defineInRange("Glass Break Fall Distance", 2.2, 0.0, 64.0);
         GLASS_PANE_BREAK_ON_FALL = BUILDER
                 .comment("Should Glass Pane Break When fallen on? (Includes Stained Glass Pane) Vanilla : false   Mod Default : true")
                 .define("Glass Pane Break On Fall", true);
         GLASS_PANE_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for glass pane to break on fall if Glass Pane Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Glass Pane Break Fall Distance", 2.2F);
+                .defineInRange("Glass Pane Break Fall Distance", 2.2, 0.0, 64.0);
 
         HAY_BALE_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take when they fall on Hay Bales.  Vanilla : 0.2. 0.2 = 20% fall damage which is the same as an 80% fall damage reduction")
-                .define("Hay Bale Fall Damage Percentage", 0.2F);
+                .comment("How much fall damage entities will take when they fall on Hay Bales.  Vanilla : 0.2. 0.2 = 20% fall damage which is the same as a 80% fall damage reduction")
+                .defineInRange("Hay Bale Fall Damage Percentage", 0.2, 0.0, 1.0);
 
 
         GRASS_BREAK_ON_FALL = BUILDER
@@ -125,7 +135,7 @@ public class ConfigurableFallsCommonConfigs {
                 .define("Grass Break On Fall", true);
         GRASS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Grass to break on fall if Grass Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Grass Break Fall Distance", 2.2F);
+                .defineInRange("Grass Break Fall Distance", 2.2, 0.0, 64.0);
         GRASS_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Grass have a chance to drop seeds when broken by entities falling on it? Mod Default : true  *Requires Grass Break On Fall to be set to true")
                 .define("Grass Has A Chance To Drop Seeds When Broken By Entities Falling On It", true);
@@ -134,24 +144,49 @@ public class ConfigurableFallsCommonConfigs {
                 .define("Grass Turns To Dirt When Fallen On", true);
         GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Grass to turn to Dirt if Grass Turns To Dirt When Fallen On = true  Mod Default : 2.9    Jumping of 1 block = 2.1")
-                .define("Grass Turns To Dirt Fall Distance", 2.9F);
+                .defineInRange("Grass Turns To Dirt Fall Distance", 2.9, 0.0, 64.0);
         TALL_GRASS_BREAK_ON_FALL = BUILDER
                 .comment("Should Tall Grass Break When fallen on?  Vanilla : false   Mod Default : true")
                 .define("Tall Grass Break On Fall", true);
         TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Tall Grass to break on fall if Tall Grass Break On Fall = true, Jumping of 1 block = 2.1")
-                .define("Tall Grass Break Fall Distance", 2.9F);
+                .defineInRange("Tall Grass Break Fall Distance", 2.9, 0.0, 64.0);
         TALL_GRASS_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Tall Grass have a chance to drop seeds when broken by entities falling on it? Mod Default : true  *Requires Tall Grass Break On Fall to be set to true")
                 .define("Tall Grass Has A Chance To Drop Seeds When Broken By Entities Falling On It", true);
 
         CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Blocks that have the #fragile tag to break on fall, Jumping of 1 block = 2.1")
-                .define("Blocks With #fragile Required Fall Distance For Block To Break", 2.2F);
+                .defineInRange("Blocks With #fragile Required Fall Distance For Block To Break", 2.2, 0.0, 64.0);
         CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Blocks that have the #fragile tag drop their block drops Mod Default : true ")
                 .define("Blocks With #fragile tag drop loot", true);
 
+
+        SUS_BLOCKS_BREAK_ON_FALL = BUILDER
+                .comment("Should Suspicious Blocks Break When fallen on?  Vanilla : false   Mod Default : true")
+                .define("Suspicious Blocks Break On Fall", true);
+        SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for suspicious blocks to break on fall if Suspicious Blocks Break On Fall = true, Jumping of 1 block = 2.1")
+                .defineInRange("Suspicious Blocks Break Fall Distance", 2.2, 0.0, 64.0);
+
+
+        MELON_EXPLODE_INTO_SLICES_ON_FALL = BUILDER
+                .comment("Should Melon Explode Into Melon Slices When fallen on?  Vanilla : false   Mod Default : true")
+                .define("Melon Explode Into Melon Slices On Fall", true);
+        MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for melon to explode on fall if Melon Explode Into Melon Slices On Fall = true, Jumping of 1 block = 2.1")
+                .defineInRange("Melon Explode Into Melon Slices Fall Distance", 2.2, 0.0, 64.0);
+
+        LEAVES_BREAK_ON_FALL = BUILDER
+                .comment("Should Leaves Break When fallen on?  Vanilla & Mod Default : false")
+                .define("Leaves Break On Fall", false);
+        LEAVES_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for Leaves to break on fall if Leaves Break On Fall = true, Jumping of 1 block = 2.1")
+                .defineInRange("Leaves Break Fall Distance", 2.2, 0.0, 64.0);
+        LEAVES_BREAK_ON_FALL_DROPS = BUILDER
+                .comment("Should Leaves drop apples, saplings & sticks when broken by entities falling on it? Mod Default : false  *Requires Leaves Break On Fall to be set to true")
+                .define("Leaves Drops Apples and Saplings and Sticks When Broken By Entities Falling On It", false);
 
 
         BUILDER.pop();

@@ -366,32 +366,32 @@ public abstract class EntityMixin implements IForgeEntity {
                 this.doWaterSplashEffect();
 
 
-
-
                 BlockPos blockPos = new BlockPos(this.getBlockX(), this.getBlockY(), this.getBlockZ());
+
                 int waterDepth = 1;
                 while (this.level().getFluidState(new BlockPos(blockPos.getX(), blockPos.getY() - waterDepth, blockPos.getZ())).is(FluidTags.WATER)) {
                     waterDepth++;
                 }
                 try {
-                    if (this.fallDistance >= ConfigurableFallsCommonConfigs.WATER_FALL_DAMAGE_FALL_DISTANCE.get()) {
-                        if (waterDepth == 1) {
-                            this.causeFallDamage(this.fallDistance, ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get(), this.damageSources().fall());
-                        }
-                        if (waterDepth == 2) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get(), this.damageSources().fall());
-                        }
-                        if (waterDepth == 3) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get(), this.damageSources().fall());
-                        }
-                        if (waterDepth == 4) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get(), this.damageSources().fall());
-                        }
-                        if (waterDepth >= 5) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get(), this.damageSources().fall());
-                        }
+                    if (this.level().getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(FluidTags.WATER)) {
+                      if (this.fallDistance >= ConfigurableFallsCommonConfigs.WATER_FALL_DAMAGE_FALL_DISTANCE.get()) {
+                          if (waterDepth == 1) {
+                            this.causeFallDamage(this.fallDistance, ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                          }
+                          if (waterDepth == 2) {
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                          }
+                          if (waterDepth == 3) {
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                          }
+                          if (waterDepth == 4) {
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                          }
+                          if (waterDepth >= 5) {
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                          }
+                       }
                     }
-
                 }
                 catch (Exception e) {
                     //System.out.println(e);
