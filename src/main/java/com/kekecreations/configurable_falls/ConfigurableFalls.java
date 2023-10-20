@@ -29,7 +29,7 @@ public class ConfigurableFalls
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::loadComplete);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigurableFallsCommonConfigs.SPEC, "configurable-falls.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigurableFallsCommonConfigs.SPEC, "configurable-falls-common.toml");
 
 
         MinecraftForge.EVENT_BUS.register(this);
