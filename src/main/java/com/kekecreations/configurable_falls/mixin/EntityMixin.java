@@ -349,10 +349,6 @@ public abstract class EntityMixin implements IForgeEntity {
 
     @Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At("HEAD"), cancellable = true)
     public void updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo ci) {
-        /*if (this.updateFluidHeightAndDoFluidPushing(FluidTags.WATER, 0.014)) {
-            this.hurt(this.damageSources().fall(), 6);
-            System.out.println("Mixin Executed");
-        }*/
         Entity entity = this.getVehicle();
         if (entity instanceof Boat boat) {
             if (!boat.isUnderWater()) {
@@ -376,19 +372,19 @@ public abstract class EntityMixin implements IForgeEntity {
                     if (this.level().getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(FluidTags.WATER)) {
                       if (this.fallDistance >= ConfigurableFallsCommonConfigs.WATER_FALL_DAMAGE_FALL_DISTANCE.get()) {
                           if (waterDepth == 1) {
-                            this.causeFallDamage(this.fallDistance, ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
                           }
                           if (waterDepth == 2) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
                           }
                           if (waterDepth == 3) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
                           }
                           if (waterDepth == 4) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
                           }
                           if (waterDepth >= 5) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
                           }
                        }
                     }
