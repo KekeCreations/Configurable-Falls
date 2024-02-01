@@ -2,12 +2,12 @@ package com.kekecreations.configurable_falls.mixin;
 
 import com.kekecreations.configurable_falls.config.ConfigurableFallsCommonConfigs;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
@@ -63,7 +64,6 @@ public abstract class EntityMixin implements IForgeEntity {
 
     @Shadow public abstract boolean hurt(DamageSource p_19946_, float p_19947_);
 
-    @Shadow public abstract DamageSources damageSources();
 
     @Shadow public boolean updateFluidHeightAndDoFluidPushing(TagKey<Fluid> p_204032_, double p_204033_) {
         return false;
@@ -120,10 +120,6 @@ public abstract class EntityMixin implements IForgeEntity {
         return this.position.x;
     }
     @Shadow
-    public Level level() {
-        return null;
-    }
-    @Shadow
     protected Vec3 limitPistonMovement(Vec3 p_20134_) {
         return null;
     }
@@ -137,29 +133,25 @@ public abstract class EntityMixin implements IForgeEntity {
     @Shadow protected boolean isHorizontalCollisionMinor(Vec3 p_196625_) {
         return false;
     }
-    @Shadow public void setOnGroundWithKnownMovement(boolean p_289661_, Vec3 p_289653_) {
-        this.onGround = p_289661_;
-        this.checkSupportingBlock(p_289661_, p_289653_);
-    }
-    @Shadow protected void checkSupportingBlock(boolean p_289694_, @Nullable Vec3 p_289680_) {
-    }
     @Shadow
     public Vec3 getDeltaMovement() {
         return this.deltaMovement;
     }
-    @Deprecated
-    @Shadow
-    public BlockPos getOnPosLegacy() {
-        return this.getOnPos(0.2F);
-    }
-    @Shadow protected BlockPos getOnPos(float p_216987_) {
-        return null;
-    }
+
     @Shadow public BlockPos getOnPos() {
-        return this.getOnPos(1.0E-5F);
-    }
-    @Shadow public boolean onGround() {
-        return this.onGround;
+        int i = Mth.floor(this.position.x);
+        int j = Mth.floor(this.position.y - (double)0.2F);
+        int k = Mth.floor(this.position.z);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        if (this.level.isEmptyBlock(blockpos)) {
+            BlockPos blockpos1 = blockpos.below();
+            BlockState blockstate = this.level.getBlockState(blockpos1);
+            if (blockstate.collisionExtendsVertically(this.level, blockpos1, Entity.class.cast(this))) {
+                return blockpos1;
+            }
+        }
+
+        return blockpos;
     }
     @Shadow public final boolean isRemoved() {
         return this.removalReason != null;
@@ -170,16 +162,8 @@ public abstract class EntityMixin implements IForgeEntity {
     @Shadow public boolean isPassenger() {
         return this.getVehicle() != null;
     }
-    @Shadow private boolean isStateClimbable(BlockState p_286733_) {
-        return p_286733_.is(BlockTags.CLIMBABLE) || p_286733_.is(Blocks.POWDER_SNOW);
-    }
-    @Shadow private boolean vibrationAndSoundEffectsFromBlock(BlockPos p_286221_, BlockState p_286549_, boolean p_286708_, boolean p_286543_, Vec3 p_286448_) {
-        return p_286708_;
-    }
     @Shadow protected float nextStep() {
         return (float)((int)this.moveDist + 1);
-    }
-    @Shadow protected void waterSwimSound() {
     }
     @Shadow public void gameEvent(GameEvent p_146851_) {
     }
@@ -198,6 +182,25 @@ public abstract class EntityMixin implements IForgeEntity {
         this.remainingFireTicks = p_20269_;
     }
 
+    @Shadow  public boolean isSteppingCarefully() {
+        return false;
+    }
+    @Shadow public boolean isVehicle() {
+        return false;
+    }
+    @Shadow  @Nullable
+    public Entity getControllingPassenger() {
+        return null;
+    }
+    @Shadow protected void playSwimSound(float p_20213_) {
+    }
+    @Shadow
+    private void playAmethystStepSound(BlockState p_146883_) {
+    }
+    @Shadow protected void playStepSound(BlockPos p_20135_, BlockState p_20136_) {
+    }
+
+
     @Inject(method = "move", at = @At("HEAD"), cancellable = true)
     public void move(MoverType p_19973_, Vec3 p_19974_, CallbackInfo ci) {
         if (this.noPhysics) {
@@ -211,7 +214,7 @@ public abstract class EntityMixin implements IForgeEntity {
                 }
             }
 
-            this.level().getProfiler().push("move");
+            this.level.getProfiler().push("move");
             if (this.stuckSpeedMultiplier.lengthSqr() > 1.0E-7D) {
                 p_19974_ = p_19974_.multiply(this.stuckSpeedMultiplier);
                 this.stuckSpeedMultiplier = Vec3.ZERO;
@@ -223,7 +226,7 @@ public abstract class EntityMixin implements IForgeEntity {
             double d0 = vec3.lengthSqr();
             if (d0 > 1.0E-7D) {
                 if (this.fallDistance != 0.0F && d0 >= 1.0D) {
-                    BlockHitResult blockhitresult = this.level().clip(new ClipContext(this.position(), this.position().add(vec3), ClipContext.Block.FALLDAMAGE_RESETTING, ClipContext.Fluid.NONE, Entity.class.cast(this)));
+                    BlockHitResult blockhitresult = this.level.clip(new ClipContext(this.position(), this.position().add(vec3), ClipContext.Block.FALLDAMAGE_RESETTING, ClipContext.Fluid.NONE, Entity.class.cast(this)));
                     if (blockhitresult.getType() != HitResult.Type.MISS) {
                         this.resetFallDistance();
                     }
@@ -232,11 +235,11 @@ public abstract class EntityMixin implements IForgeEntity {
                 this.setPos(this.getX() + vec3.x, this.getY() + vec3.y, this.getZ() + vec3.z);
             }
 
-            this.level().getProfiler().pop();
-            this.level().getProfiler().push("rest");
-            boolean flag4 = !Mth.equal(p_19974_.x, vec3.x);
+            this.level.getProfiler().pop();
+            this.level.getProfiler().push("rest");
+            boolean flag1 = !Mth.equal(p_19974_.x, vec3.x);
             boolean flag = !Mth.equal(p_19974_.z, vec3.z);
-            this.horizontalCollision = flag4 || flag;
+            this.horizontalCollision = flag1 || flag;
             this.verticalCollision = p_19974_.y != vec3.y;
             this.verticalCollisionBelow = this.verticalCollision && p_19974_.y < 0.0D;
             if (this.horizontalCollision) {
@@ -245,25 +248,25 @@ public abstract class EntityMixin implements IForgeEntity {
                 this.minorHorizontalCollision = false;
             }
 
-            this.setOnGroundWithKnownMovement(this.verticalCollisionBelow, vec3);
-            BlockPos blockpos = this.getOnPosLegacy();
-            BlockState blockstate = this.level().getBlockState(blockpos);
-            this.checkFallDamage(vec3.y, this.onGround(), blockstate, blockpos);
+            this.onGround = this.verticalCollision && p_19974_.y < 0.0D;
+            BlockPos blockpos = this.getOnPos();
+            BlockState blockstate = this.level.getBlockState(blockpos);
+            this.checkFallDamage(vec3.y, this.onGround, blockstate, blockpos);
             if (this.isRemoved()) {
-                this.level().getProfiler().pop();
+                this.level.getProfiler().pop();
             } else {
                 if (this.horizontalCollision) {
                     Vec3 vec31 = this.getDeltaMovement();
-                    this.setDeltaMovement(flag4 ? 0.0D : vec31.x, vec31.y, flag ? 0.0D : vec31.z);
+                    this.setDeltaMovement(flag1 ? 0.0D : vec31.x, vec31.y, flag ? 0.0D : vec31.z);
                 }
 
                 Block block = blockstate.getBlock();
                 if (p_19974_.y != vec3.y) {
-                    block.updateEntityAfterFallOn(this.level(), Entity.class.cast(this));
+                    block.updateEntityAfterFallOn(this.level, Entity.class.cast(this));
                 }
 
-                if (this.onGround()) {
-                    block.stepOn(this.level(), blockpos, blockstate, Entity.class.cast(this));
+                if (this.onGround && !this.isSteppingCarefully()) {
+                    block.stepOn(this.level, blockpos, blockstate, Entity.class.cast(this));
                 }
 
                 Entity.MovementEmission entity$movementemission = this.getMovementEmission();
@@ -271,61 +274,61 @@ public abstract class EntityMixin implements IForgeEntity {
                     double d1 = vec3.x;
                     double d2 = vec3.y;
                     double d3 = vec3.z;
-                    this.flyDist = (float)((double)this.flyDist + vec3.length() * 0.6D);
-                    BlockPos blockpos1 = this.getOnPos();
-                    BlockState blockstate1 = this.level().getBlockState(blockpos1);
-                    boolean flag1 = this.isStateClimbable(blockstate1);
-                    if (!flag1) {
+                    this.flyDist = (float) ((double) this.flyDist + vec3.length() * 0.6D);
+                    if (!blockstate.is(BlockTags.CLIMBABLE) && !blockstate.is(Blocks.POWDER_SNOW)) {
                         d2 = 0.0D;
                     }
 
                     this.walkDist += (float)vec3.horizontalDistance() * 0.6F;
                     this.moveDist += (float)Math.sqrt(d1 * d1 + d2 * d2 + d3 * d3) * 0.6F;
-                    if (this.moveDist > this.nextStep && !blockstate1.isAir()) {
-                        boolean flag2 = blockpos1.equals(blockpos);
-                        boolean flag3 = this.vibrationAndSoundEffectsFromBlock(blockpos, blockstate, entity$movementemission.emitsSounds(), flag2, p_19974_);
-                        if (!flag2) {
-                            flag3 |= this.vibrationAndSoundEffectsFromBlock(blockpos1, blockstate1, false, entity$movementemission.emitsEvents(), p_19974_);
-                        }
-
-                        if (flag3) {
-                            this.nextStep = this.nextStep();
-                        } else if (this.isInWater()) {
-                            this.nextStep = this.nextStep();
+                    if (this.moveDist > this.nextStep && !blockstate.isAir()) {
+                        this.nextStep = this.nextStep();
+                        if (this.isInWater()) {
                             if (entity$movementemission.emitsSounds()) {
-                                this.waterSwimSound();
+                                Entity entity = this.isVehicle() && this.getControllingPassenger() != null ? this.getControllingPassenger() : Entity.class.cast(this);
+                                float f = entity == Entity.class.cast(this) ? 0.35F : 0.4F;
+                                Vec3 vec32 = entity.getDeltaMovement();
+                                float f1 = Math.min(1.0F, (float)Math.sqrt(vec32.x * vec32.x * (double)0.2F + vec32.y * vec32.y + vec32.z * vec32.z * (double)0.2F) * f);
+                                this.playSwimSound(f1);
                             }
 
                             if (entity$movementemission.emitsEvents()) {
                                 this.gameEvent(GameEvent.SWIM);
                             }
+                        } else {
+                            if (entity$movementemission.emitsSounds()) {
+                                this.playAmethystStepSound(blockstate);
+                                this.playStepSound(blockpos, blockstate);
+                            }
+
+                            if (entity$movementemission.emitsEvents() && !blockstate.is(BlockTags.OCCLUDES_VIBRATION_SIGNALS)) {
+                                this.gameEvent(GameEvent.STEP);
+                            }
                         }
-                    } else if (blockstate1.isAir()) {
+                    } else if (blockstate.isAir()) {
                         this.processFlappingMovement();
                     }
                 }
 
                 this.tryCheckInsideBlocks();
-                float f = this.getBlockSpeedFactor();
-                this.setDeltaMovement(this.getDeltaMovement().multiply((double)f, 1.0D, (double)f));
-                if (this.level().getBlockStatesIfLoaded(this.getBoundingBox().deflate(1.0E-6D)).noneMatch((p_20127_) -> {
-                    return p_20127_.is(BlockTags.FIRE) || p_20127_.is(Blocks.LAVA);
-                })) {
-                    if (this.remainingFireTicks <= 0) {
-                        this.setRemainingFireTicks(-this.getFireImmuneTicks());
-                    }
-
-                    if (this.wasOnFire && (this.isInPowderSnow || this.isInWaterRainOrBubble() || this.isInFluidType((fluidType, height) -> this.canFluidExtinguish(fluidType)))) {
-                        this.playEntityOnFireExtinguishedSound();
-                    }
-                }
-
-                if (this.isOnFire() && (this.isInPowderSnow || this.isInWaterRainOrBubble() || this.isInFluidType((fluidType, height) -> this.canFluidExtinguish(fluidType)))) {
+                float f2 = this.getBlockSpeedFactor();
+                this.setDeltaMovement(this.getDeltaMovement().multiply((double) f2, 1.0D, (double) f2));
+            }
+            if (this.level.getBlockStatesIfLoaded(this.getBoundingBox().deflate(1.0E-6D)).noneMatch((p_20127_) -> p_20127_.is(BlockTags.FIRE) || p_20127_.is(Blocks.LAVA))) {
+                if (this.remainingFireTicks <= 0) {
                     this.setRemainingFireTicks(-this.getFireImmuneTicks());
                 }
 
-                this.level.getProfiler().pop();
+                if (this.wasOnFire && (this.isInPowderSnow || this.isInWaterRainOrBubble())) {
+                    this.playEntityOnFireExtinguishedSound();
+                }
             }
+
+            if (this.isOnFire() && (this.isInPowderSnow || this.isInWaterRainOrBubble())) {
+                this.setRemainingFireTicks(-this.getFireImmuneTicks());
+            }
+
+            this.level.getProfiler().pop();
         }
         ci.cancel();
     }
@@ -337,7 +340,6 @@ public abstract class EntityMixin implements IForgeEntity {
 
     @Shadow public abstract boolean causeFallDamage(float p_146828_, float p_146829_, DamageSource p_146830_);
 
-    @Shadow public abstract void checkSlowFallDistance();
 
     @Shadow public abstract int getBlockX();
 
@@ -349,19 +351,10 @@ public abstract class EntityMixin implements IForgeEntity {
 
     @Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At("HEAD"), cancellable = true)
     public void updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo ci) {
-        /*if (this.updateFluidHeightAndDoFluidPushing(FluidTags.WATER, 0.014)) {
-            this.hurt(this.damageSources().fall(), 6);
-            System.out.println("Mixin Executed");
-        }*/
-        Entity entity = this.getVehicle();
-        if (entity instanceof Boat boat) {
-            if (!boat.isUnderWater()) {
-                this.wasTouchingWater = false;
-                return;
-            }
-        }
 
-        if (this.updateFluidHeightAndDoFluidPushing(FluidTags.WATER, 0.014D)) {
+        if (this.getVehicle() instanceof Boat) {
+            this.wasTouchingWater = false;
+        } else if (this.updateFluidHeightAndDoFluidPushing(FluidTags.WATER, 0.014D)) {
             if (!this.wasTouchingWater && !this.firstTick) {
                 this.doWaterSplashEffect();
 
@@ -369,26 +362,26 @@ public abstract class EntityMixin implements IForgeEntity {
                 BlockPos blockPos = new BlockPos(this.getBlockX(), this.getBlockY(), this.getBlockZ());
 
                 int waterDepth = 1;
-                while (this.level().getFluidState(new BlockPos(blockPos.getX(), blockPos.getY() - waterDepth, blockPos.getZ())).is(FluidTags.WATER)) {
+                while (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY() - waterDepth, blockPos.getZ())).is(FluidTags.WATER)) {
                     waterDepth++;
                 }
                 try {
-                    if (this.level().getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(FluidTags.WATER)) {
+                    if (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(FluidTags.WATER)) {
                       if (this.fallDistance >= ConfigurableFallsCommonConfigs.WATER_FALL_DAMAGE_FALL_DISTANCE.get()) {
                           if (waterDepth == 1) {
-                            this.causeFallDamage(this.fallDistance, ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance, ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue(), DamageSource.FALL);
                           }
                           if (waterDepth == 2) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE.get().floatValue(), DamageSource.FALL);
                           }
                           if (waterDepth == 3) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE.get().floatValue(), DamageSource.FALL);
                           }
                           if (waterDepth == 4) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE.get().floatValue(), DamageSource.FALL);
                           }
                           if (waterDepth >= 5) {
-                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get().floatValue(), this.damageSources().fall());
+                            this.causeFallDamage(this.fallDistance + (waterDepth - 1), ConfigurableFallsCommonConfigs.WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE.get().floatValue(), DamageSource.FALL);
                           }
                        }
                     }
