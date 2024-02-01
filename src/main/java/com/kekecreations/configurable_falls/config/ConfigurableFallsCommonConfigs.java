@@ -19,8 +19,6 @@ public class ConfigurableFallsCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> ICE_BREAK_ON_FALL;
     public static final ForgeConfigSpec.ConfigValue<Double> ICE_BREAK_ON_FALL_FALL_DISTANCE;
 
-    public static final ForgeConfigSpec.ConfigValue<Boolean> SUS_BLOCKS_BREAK_ON_FALL;
-    public static final ForgeConfigSpec.ConfigValue<Double> SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> MELON_EXPLODE_INTO_SLICES_ON_FALL;
     public static final ForgeConfigSpec.ConfigValue<Double> MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE;
@@ -162,13 +160,6 @@ public class ConfigurableFallsCommonConfigs {
                 .comment("Should Blocks that have the #fragile tag drop their block drops Mod Default : true ")
                 .define("Blocks With #fragile tag drop loot", true);
 
-
-        SUS_BLOCKS_BREAK_ON_FALL = BUILDER
-                .comment("Should Suspicious Blocks Break When fallen on?  Vanilla : false   Mod Default : true")
-                .define("Suspicious Blocks Break On Fall", true);
-        SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
-                .comment("Required Fall Distance for suspicious blocks to break on fall if Suspicious Blocks Break On Fall = true, Jumping of 1 block = 2.1")
-                .defineInRange("Suspicious Blocks Break Fall Distance", 2.2, 0.0, 64.0);
 
 
         MELON_EXPLODE_INTO_SLICES_ON_FALL = BUILDER
