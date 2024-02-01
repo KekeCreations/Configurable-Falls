@@ -1,6 +1,7 @@
 package com.kekecreations.configurable_falls.mixin;
 
 import com.kekecreations.configurable_falls.config.ConfigurableFallsCommonConfigs;
+import com.kekecreations.configurable_falls.util.ConfigurableFallsTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.fluid.Fluid;
@@ -65,11 +66,11 @@ public abstract class EntityMixin implements IForgeEntity {
                 BlockPos blockPos = new BlockPos(this.getX(), this.getY(), this.getZ());
 
                 int waterDepth = 1;
-                while (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY() - waterDepth, blockPos.getZ())).is(FluidTags.WATER)) {
+                while (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY() - waterDepth, blockPos.getZ())).is(ConfigurableFallsTags.WATER)) {
                     waterDepth++;
                 }
                 try {
-                    if (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(FluidTags.WATER)) {
+                    if (this.level.getFluidState(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ())).is(ConfigurableFallsTags.WATER)) {
                       if (this.fallDistance >= ConfigurableFallsCommonConfigs.WATER_FALL_DAMAGE_FALL_DISTANCE.get()) {
                           if (waterDepth == 1) {
                             this.causeFallDamage(this.fallDistance + (waterDepth), ConfigurableFallsCommonConfigs.WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE.get().floatValue());
