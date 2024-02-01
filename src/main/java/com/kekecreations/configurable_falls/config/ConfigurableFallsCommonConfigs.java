@@ -59,28 +59,23 @@ public class ConfigurableFallsCommonConfigs {
                 .defineInRange("Water Fall Damage Required Fall Distance", 2.2, 0.0, 256.0);
 
         WATER_DEPTH_1_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take in 1 block deep water! (Uses #configurable_falls:water fluid tag)")
-                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .comment("How much fall damage entities will take in 1 block deep water! (Uses #configurable_falls:water fluid tag) Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .defineInRange("1 Block Deep Water Fall Damage Percentage", 1.0, 0.0, 1.0);
 
         WATER_DEPTH_2_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take in 2 block deep water! (Uses #configurable_falls:water fluid tag)")
-                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .comment("How much fall damage entities will take in 2 block deep water! (Uses #configurable_falls:water fluid tag) Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .defineInRange("2 Block Deep Water Fall Damage Percentages", 0.5, 0.0, 1.0);
 
         WATER_DEPTH_3_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take in 3 block deep water! (Uses #configurable_falls:water fluid tag)")
-                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .comment("How much fall damage entities will take in 3 block deep water! (Uses #configurable_falls:water fluid tag) Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .defineInRange("3 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
         WATER_DEPTH_4_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take in 4 block deep water! (Uses #configurable_falls:water fluid tag)")
-                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .comment("How much fall damage entities will take in 4 block deep water! (Uses #configurable_falls:water fluid tag) Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .defineInRange("4 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
         WATER_DEPTH_5_FALL_DAMAGE_PERCENTAGE = BUILDER
-                .comment("How much fall damage entities will take in 5 block deep water and more! (Uses #configurable_falls:water fluid tag)")
-                .comment("Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
+                .comment("How much fall damage entities will take in 5 block deep water and more! (Uses #configurable_falls:water fluid tag) Value explanation : 1.0 = 100% Fall Damage, 0.0 = 0% Fall Damage, 0.5 = 50% Fall Damage, 0.7 = 70% Fall Damage which is the same as a 30% Fall Damage Reduction")
                 .defineInRange("5 Block Deep Water Fall Damage Percentages", 0.0, 0.0, 1.0);
 
 
