@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HayBlock.class)
-public class HayBlockMixin {
+public class ConfigurableFallsHayBlockMixin {
 
     @Inject(method = "fallOn", at = @At("HEAD"))
     public void fallOn(Level p_153362_, BlockState p_153363_, BlockPos p_153364_, Entity p_153365_, float p_153366_, CallbackInfo ci) {

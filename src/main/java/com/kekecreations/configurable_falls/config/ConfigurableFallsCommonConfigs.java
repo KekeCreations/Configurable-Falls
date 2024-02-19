@@ -50,6 +50,14 @@ public class ConfigurableFallsCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS;
     public static final ForgeConfigSpec.ConfigValue<Double> CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> SMALL_FLOWERS_BREAK_ON_FALL;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> SMALL_FLOWERS_BREAK_ON_FALL_DROPS;
+    public static final ForgeConfigSpec.ConfigValue<Double> SMALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> TALL_FLOWERS_BREAK_ON_FALL;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> TALL_FLOWERS_BREAK_ON_FALL_DROPS;
+    public static final ForgeConfigSpec.ConfigValue<Double> TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE;
+
 
     static {
         BUILDER.push("Configurable Falls Config");
@@ -161,6 +169,31 @@ public class ConfigurableFallsCommonConfigs {
         LEAVES_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Leaves drop apples, saplings & sticks when broken by entities falling on it? Mod Default : false  *Requires Leaves Break On Fall to be set to true")
                 .define("Leaves Drops Apples and Saplings and Sticks When Broken By Entities Falling On It", false);
+        BUILDER.pop();
+
+
+        BUILDER.comment("Settings for Flowers");
+        BUILDER.push("Flowers Settings");
+        SMALL_FLOWERS_BREAK_ON_FALL = BUILDER
+                .comment("Should Small flowers Break When fallen on? Mod Default : true (Affects Blocks From #minecraft:small_flowers Tag)")
+                .define("Small Flowers Break On Fall", true);
+        SMALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for Small Flowers to break on fall if Small Flowers Break On Fall = true, Jumping of 1 block = 2.1")
+                .defineInRange("Small Flowers Break Fall Distance", 2.2, 0.0, 256.0);
+        SMALL_FLOWERS_BREAK_ON_FALL_DROPS = BUILDER
+                .comment("Should Small Flowers drop themselves when broken by entities falling on it? Mod Default : true  *Requires Small Flowers Break On Fall to be set to true")
+                .define("Small Flowers Drop Themselves When Broken By Fall", true);
+
+        TALL_FLOWERS_BREAK_ON_FALL = BUILDER
+                .comment("Should Tall flowers Break When fallen on? Mod Default : true (Affects Blocks From #minecraft:tall_flowers Tag)")
+                .define("Tall Flowers Break On Fall", true);
+        TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
+                .comment("Required Fall Distance for Tall Flowers to break on fall if Tall Flowers Break On Fall = true, Jumping of 1 block = 2.1")
+                .defineInRange("Tall Flowers Break Fall Distance", 2.2, 0.0, 256.0);
+        TALL_FLOWERS_BREAK_ON_FALL_DROPS = BUILDER
+                .comment("Should Tall Flowers drop themselves when broken by entities falling on it? Mod Default : true  *Requires Tall Flowers Break On Fall to be set to true")
+                .define("Tall Flowers Drop Themselves When Broken By Fall", true);
+
         BUILDER.pop();
 
 

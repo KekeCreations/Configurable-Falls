@@ -23,8 +23,6 @@ public class KekeFallEvent {
         Entity entity = livingFallEvent.getEntity();
         BlockPos layerPos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ());
         BlockPos blockPos = new BlockPos(entity.getBlockX(), entity.getBlockY() - 1, entity.getBlockZ());
-        //Entity getBlockStateOn Method has protected access in 1.18.2
-        BlockState getBlockStateOn = entity.level.getBlockState(entity.getOnPos());
 
 
         if (!entity.level.isClientSide()) {
@@ -54,6 +52,15 @@ public class KekeFallEvent {
             }
             if (entity.fallDistance >= ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(ConfigurableFallsTags.TALL_GRASS)) {
                 entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            //FLOWERS
+            if (entity.fallDistance >= ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(BlockTags.SMALL_FLOWERS)) {
+                entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            if (entity.fallDistance >= ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(BlockTags.TALL_FLOWERS)) {
+                entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
             }
 
             //LEAVES
