@@ -52,6 +52,14 @@ public class KekeFallEvent {
             if (entity.fallDistance >= ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(ConfigurableFallsTags.TALL_GRASS)) {
                 entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.TALL_GRASS_BREAK_ON_FALL_DROPS.get(), entity);
             }
+            //FLOWERS
+            if (entity.fallDistance >= ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(BlockTags.SMALL_FLOWERS)) {
+                entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.SMALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            if (entity.fallDistance >= ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL.get() && entity.level.getBlockState(layerPos).is(BlockTags.TALL_FLOWERS)) {
+                entity.level.destroyBlock(layerPos, ConfigurableFallsCommonConfigs.TALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
 
             //LEAVES
             if (entity.fallDistance >= ConfigurableFallsCommonConfigs.LEAVES_BREAK_ON_FALL_FALL_DISTANCE.get() && ConfigurableFallsCommonConfigs.LEAVES_BREAK_ON_FALL.get() && entity.level.getBlockState(blockPos).is(BlockTags.LEAVES)) {
