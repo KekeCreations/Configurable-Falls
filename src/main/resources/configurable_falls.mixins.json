@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "configurable_falls.refmap.json",
   "mixins" : [
-    "EntityMixin",
-    "HayBlockMixin"
+    "ConfigurableFallsEntityMixin",
+    "ConfigurableFallsHayBlockMixin"
   ],
   "client": [
 
