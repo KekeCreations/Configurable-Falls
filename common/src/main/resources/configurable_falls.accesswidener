@@ -1,4 +1,0 @@
-accessWidener v2 named
-
-accessible method net/minecraft/tags/BlockTags create (Ljava/lang/String;)Lnet/minecraft/tags/TagKey;
-accessible method net/minecraft/tags/FluidTags create (Ljava/lang/String;)Lnet/minecraft/tags/TagKey;
