@@ -1,17 +1,16 @@
 package com.kekecreations.configurable_falls;
 
+import com.kekecreations.configurable_falls.core.config.ConfigurableFallsCommonConfig;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 
 @Mod(ConfigurableFalls.MOD_ID)
 public class ConfigurableFallsForge {
     
     public ConfigurableFallsForge() {
-    
-        // This method is invoked by the Forge mod loader when it is ready
-        // to load your mod. You can access Forge and Common code in this
-        // project.
-    
-        // Use Forge to bootstrap the Common mod.
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigurableFallsCommonConfig.SPEC, "configurable_falls-common.toml");
+
         ConfigurableFalls.init();
         
     }
