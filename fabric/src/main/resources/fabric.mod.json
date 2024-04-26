@@ -8,11 +8,11 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://kekecreations.boomla.net/minecraft/java-mods/configurable-falls",
+        "sources": "https://github.com/KekeCreations/Configurable-Falls"
     },
     "license": "${license}",
-    "icon": "assets/${mod_id}/${mod_id}.png",
+    "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
@@ -29,9 +29,6 @@
         "forgeconfigapiport": "*",
         "minecraft": "1.20.2",
         "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
     }
 }
   
