@@ -117,7 +117,7 @@ public class ConfigurableFallsCommonConfig {
         BUILDER.comment("Settings for Glass");
         BUILDER.push("Glass Settings");
         GLASS_BREAK_ON_FALL = BUILDER
-                .comment("Should Glass Break When fallen on? Mod Default : true (Affects Blocks From #forge:glass Tag)")
+                .comment("Should Glass Break When fallen on? Mod Default : true (Affects Blocks From #forge:glass Tag on Forge/NeoForge) (Affects Blocks from #c:glass_blocks Tag on Fabric)")
                 .define("Glass Break On Fall", true);
         GLASS_BREAK_ON_FALL_DROPS = BUILDER
                 .comment("Should Tinted Glass drop when broken by entities falling on it? Mod Default : true  *Requires Glass Break On Fall to be set to true *If any other mods adds glass drops, glass and stained glass will drop the drops added by that mod when its set to true")
@@ -126,7 +126,7 @@ public class ConfigurableFallsCommonConfig {
                 .comment("Required Fall Distance for glass to break on fall if Glass Break On Fall = true, Jumping of 1 block = 2.1")
                 .defineInRange("Glass Break Fall Distance", 2.2, 0.0, 256.0);
         GLASS_PANE_BREAK_ON_FALL = BUILDER
-                .comment("Should Glass Pane Break When fallen on? Mod Default : true (Affects Blocks From #forge:glass_panes Tag)")
+                .comment("Should Glass Pane Break When fallen on? Mod Default : true (Affects Blocks From #forge:glass_panes Tag on Forge/NeoForge) (Affects Blocks from #c:glass_panes Tag on Fabric)")
                 .define("Glass Pane Break On Fall", true);
         GLASS_PANE_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for glass pane to break on fall if Glass Pane Break On Fall = true, Jumping of 1 block = 2.1")
