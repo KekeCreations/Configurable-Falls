@@ -29,4 +29,3 @@ rootProject.name = 'ConfigurableFalls-MultiLoader'
 include("common")
 include("fabric")
 include("forge")
-include("neoforge")
