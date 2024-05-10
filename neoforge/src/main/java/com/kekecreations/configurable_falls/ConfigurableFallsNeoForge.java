@@ -16,6 +16,6 @@ public class ConfigurableFallsNeoForge {
         ForgeConfigRegistry.INSTANCE.register(ConfigurableFalls.MOD_ID, ModConfig.Type.COMMON, ConfigurableFallsCommonConfig.SPEC, "configurable_falls-common.toml");
 
         ConfigurableFalls.init();
-        //NeoForge.EVENT_BUS.addListener(KekeFallEvent.class);
+        NeoForge.EVENT_BUS.addListener(KekeFallEvent::onFall);
     }
 }

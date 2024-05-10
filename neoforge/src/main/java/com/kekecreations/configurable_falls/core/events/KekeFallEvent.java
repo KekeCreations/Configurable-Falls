@@ -77,7 +77,7 @@ public class KekeFallEvent {
 
 
             //TAGS
-            if (entity.fallDistance >= ConfigurableFallsCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.FRAGILE)) {
+            if (entity.fallDistance >= ConfigurableFallsCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.FRAGILE) && entity.level().getBlockState(blockPos).getBlock() != Blocks.AIR) {
                 entity.level().destroyBlock(blockPos, ConfigurableFallsCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS.get(), entity);
             }
         }
