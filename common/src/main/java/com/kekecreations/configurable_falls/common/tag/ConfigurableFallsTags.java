@@ -1,4 +1,4 @@
-package com.kekecreations.configurable_falls.tag;
+package com.kekecreations.configurable_falls.common.tag;
 
 import com.kekecreations.configurable_falls.ConfigurableFalls;
 import net.minecraft.core.registries.Registries;

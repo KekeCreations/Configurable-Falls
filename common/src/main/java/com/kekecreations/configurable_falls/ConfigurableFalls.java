@@ -1,6 +1,6 @@
 package com.kekecreations.configurable_falls;
 
-import com.kekecreations.configurable_falls.tag.ConfigurableFallsTags;
+import com.kekecreations.configurable_falls.common.tag.ConfigurableFallsTags;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
