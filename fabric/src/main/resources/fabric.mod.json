@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.kekecreations.configurable_falls.ConfigurableFallsFabric"
+            "com.kekecreations.configurable_falls.FabricConfigurableFalls"
         ]
     },
     "mixins": [
@@ -24,11 +24,13 @@
         "${mod_id}.fabric.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.14",
+        "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "forgeconfigapiport": "*",
-        "minecraft": "1.20.2",
-        "java": ">=17"
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
+    },
+    "suggests": {
+        "another-mod": "*"
     }
 }
   
