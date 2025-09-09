@@ -1,6 +1,6 @@
 package com.kekecreations.configurable_falls.platform;
 
-import com.kekecreations.configurable_falls.platform.services.IPlatformHelper;
+import com.kekecreations.configurable_falls.core.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 

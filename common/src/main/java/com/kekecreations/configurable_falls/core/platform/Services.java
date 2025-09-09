@@ -1,7 +1,7 @@
-package com.kekecreations.configurable_falls.platform;
+package com.kekecreations.configurable_falls.core.platform;
 
 import com.kekecreations.configurable_falls.ConfigurableFalls;
-import com.kekecreations.configurable_falls.platform.services.IPlatformHelper;
+import com.kekecreations.configurable_falls.core.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
 

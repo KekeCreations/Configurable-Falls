@@ -1,4 +1,4 @@
-package com.kekecreations.configurable_falls.platform.services;
+package com.kekecreations.configurable_falls.core.platform.services;
 
 public interface IPlatformHelper {
 
