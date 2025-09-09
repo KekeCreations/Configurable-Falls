@@ -4,7 +4,9 @@
   "package": "com.kekecreations.configurable_falls.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "FabricEntityMixin"
+  ],
   "client": [
   ],
   "server": [],

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class HayBlockMixin {
 
     @ModifyArg(method = "fallOn", at = @At(value = "INVOKE", target = "net/minecraft/world/entity/Entity.causeFallDamage (FFLnet/minecraft/world/damagesource/DamageSource;)Z"), index = 1)
-    private float configurable_falls_modifyFloatValue(float $$0) {
+    private float configurable_falls$modifyFloatValue(float $$0) {
         return ConfigurableFallsCommonConfig.HAY_BALE_FALL_DAMAGE_PERCENTAGE.get().floatValue();
     }
 }
