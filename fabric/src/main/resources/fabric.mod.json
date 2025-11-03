@@ -8,7 +8,6 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://kekecreations.boomla.net/minecraft/java-mods/configurable-falls",
         "sources": "https://github.com/KekeCreations/Configurable-Falls"
     },
     "license": "${license}",
