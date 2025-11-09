@@ -1,7 +1,7 @@
 modLoader = "javafml" #mandatory
 loaderVersion = "${neoforge_loader_version_range}" #mandatory
 license = "${license}" # Review your options at https://choosealicense.com/.
-issueTrackerURL="https://github.com/KekeCreations/Configurable-Falls/issues" #optional
+issueTrackerURL="https://github.com/KekeCreations/Break-My-Fall" #optional
 [[mods]] #mandatory
 modId = "${mod_id}" #mandatory
 version = "${version}" #mandatory

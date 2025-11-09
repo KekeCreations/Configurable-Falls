@@ -1,8 +1,11 @@
-###V2.0.5
+###V1.0.0
 - Changed mod icon
 - Changed mod description
 - Changed mod credits
 - Removed broken webpage
+- Renamed the mod from Configurable Falls to Break My Fall
+
+THIS UPDATE WILL BREAK RESET YOUR CONFIG UNDER A NEW NAME!
 
 
 
