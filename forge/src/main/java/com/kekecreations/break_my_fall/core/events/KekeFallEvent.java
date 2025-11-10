@@ -1,0 +1,86 @@
+package com.kekecreations.break_my_fall.core.events;
+
+import com.kekecreations.break_my_fall.BreakMyFall;
+import com.kekecreations.break_my_fall.core.config.BreakMyFallCommonConfig;
+import com.kekecreations.break_my_fall.core.tags.BreakMyFallTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BrushableBlock;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = BreakMyFall.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class KekeFallEvent {
+
+
+
+    @SubscribeEvent
+    public void onFall(LivingFallEvent livingFallEvent) {
+        Entity entity = livingFallEvent.getEntity();
+        BlockPos layerPos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ());
+        BlockPos blockPos = new BlockPos(entity.getBlockX(), entity.getBlockY() - 1, entity.getBlockZ());
+
+
+        if (!entity.level().isClientSide()) {
+            //Ice
+            if (entity.fallDistance >= BreakMyFallCommonConfig.ICE_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.ICE_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.ICE)) {
+                entity.level().destroyBlock(blockPos, true, entity);
+            }
+            //Glass
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GLASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GLASS_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(Tags.Blocks.GLASS)) {
+                entity.level().destroyBlock(blockPos, BreakMyFallCommonConfig.GLASS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GLASS_PANE_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GLASS_PANE_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(Tags.Blocks.GLASS_PANES)) {
+                entity.level().destroyBlock(blockPos, false, entity);
+            }
+
+            //Snow
+            if (entity.fallDistance >= BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.SNOW)) {
+                entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            //Grass
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.GRASS)) {
+                entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.GRASS_BLOCKS)) {
+                entity.level().setBlock(blockPos, Blocks.DIRT.defaultBlockState(), 3);
+            }
+            if (entity.fallDistance >= BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.TALL_GRASS)) {
+                entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+            //FLOWERS
+            if (entity.fallDistance >= BreakMyFallCommonConfig.SMALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SMALL_FLOWERS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BlockTags.SMALL_FLOWERS)) {
+                entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.SMALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            if (entity.fallDistance >= BreakMyFallCommonConfig.TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.TALL_FLOWERS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BlockTags.TALL_FLOWERS)) {
+                entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.TALL_FLOWERS_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+            //LEAVES
+            if (entity.fallDistance >= BreakMyFallCommonConfig.LEAVES_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.LEAVES_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BlockTags.LEAVES)) {
+                entity.level().destroyBlock(blockPos, BreakMyFallCommonConfig.LEAVES_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+
+
+            //ETC
+            if (entity.fallDistance >= BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.MELON_BLOCKS)) {
+                entity.level().destroyBlock(blockPos, true, entity);
+            }
+            if (entity.fallDistance >= BreakMyFallCommonConfig.SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SUS_BLOCKS_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).getBlock() instanceof BrushableBlock) {
+                entity.level().destroyBlock(blockPos, true, entity);
+            }
+
+
+            //TAGS
+            if (entity.fallDistance >= BreakMyFallCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.FRAGILE) && entity.level().getBlockState(blockPos).getBlock() != Blocks.AIR) {
+                entity.level().destroyBlock(blockPos, BreakMyFallCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS.get(), entity);
+            }
+        }
+    }
+}

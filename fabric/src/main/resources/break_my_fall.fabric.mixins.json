@@ -1,0 +1,18 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.kekecreations.break_my_fall.core.mixin",
+    "refmap": "${mod_id}.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "FabricEntityMixin"
+    ],
+    "client": [
+    ],
+    "server": [
+    ],
+    "injectors": {
+      "defaultRequire": 1
+    }
+  }
+  

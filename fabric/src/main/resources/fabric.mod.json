@@ -8,15 +8,14 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://kekecreations.boomla.net/minecraft/java-mods/configurable-falls",
-        "sources": "https://github.com/KekeCreations/Configurable-Falls"
+        "sources": "https://github.com/KekeCreations/Break-My-Fall"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.kekecreations.configurable_falls.ConfigurableFallsFabric"
+            "com.kekecreations.break_my_fall.BreakMyFallFabric"
         ]
     },
     "mixins": [
