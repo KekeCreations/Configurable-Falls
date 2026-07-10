@@ -21,7 +21,7 @@ public class FabricEntityMixin {
 
 
     @Inject(method = "move", at = @At(value = "TAIL"))
-    public void configurable_falls$move(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
+    public void break_my_fall$move(MoverType moverType, Vec3 vec3, CallbackInfo ci) {
         Entity entity = Entity.class.cast(this);
         BlockPos layerPos = new BlockPos(entity.getBlockX(), entity.getBlockY(), entity.getBlockZ());
         BlockPos blockPos = new BlockPos(entity.getBlockX(), entity.getBlockY() - 1, entity.getBlockZ());

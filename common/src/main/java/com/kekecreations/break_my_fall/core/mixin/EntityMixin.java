@@ -55,7 +55,7 @@ public abstract class EntityMixin {
 
 
     @ModifyArg(method = "move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V", at = @At(value = "INVOKE", target = "net/minecraft/world/level/ClipContext.<init> (Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/level/ClipContext$Block;Lnet/minecraft/world/level/ClipContext$Fluid;Lnet/minecraft/world/entity/Entity;)V"), index = 3)
-    private ClipContext.Fluid configurable_falls$modifyClipContext(ClipContext.Fluid p_45691_) {
+    private ClipContext.Fluid break_my_fall$modifyClipContext(ClipContext.Fluid p_45691_) {
         return ClipContext.Fluid.NONE;
     }
 
@@ -63,7 +63,7 @@ public abstract class EntityMixin {
 
 
     @Inject(method = "updateInWaterStateAndDoWaterCurrentPushing", at = @At(value = "INVOKE", target = "net/minecraft/world/entity/Entity.doWaterSplashEffect ()V"))
-    public void configurable_falls$updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo ci) {
+    public void break_my_fall$updateInWaterStateAndDoWaterCurrentPushing(CallbackInfo ci) {
         BlockPos blockPos = new BlockPos(this.getBlockX(), this.getBlockY(), this.getBlockZ());
 
         int waterDepth = 1;

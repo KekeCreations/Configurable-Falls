@@ -1,3 +1,9 @@
+### V1.0.1
+- All mixin methods now use the correct mod ID
+- Added a new feature where the player doesn't die to lethal fall damage, you can control what health the player is left with!
+- Changed Credits
+
+
 ###V1.0.0
 - Changed mod icon
 - Changed mod description

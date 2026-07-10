@@ -62,6 +62,9 @@ public class BreakMyFallCommonConfig {
     public static final ModConfigSpec.ConfigValue<Boolean> TALL_FLOWERS_BREAK_ON_FALL_DROPS;
     public static final ModConfigSpec.ConfigValue<Double> TALL_FLOWERS_BREAK_ON_FALL_FALL_DISTANCE;
 
+    public static final ModConfigSpec.ConfigValue<Boolean> CAN_FALL_DAMAGE_KILL_THE_PLAYER;
+    public static final ModConfigSpec.ConfigValue<Double> PLAYER_HEALTH_AFTER_LETHAL_FALL;
+
 
     static {
         BUILDER.push("Break My Fall Config");
@@ -224,9 +227,18 @@ public class BreakMyFallCommonConfig {
         SUS_BLOCKS_BREAK_ON_FALL = BUILDER
                 .comment("Should Suspicious Blocks Break When fallen on? Mod Default : true (Affects Blocks That Extend The BrushableBlock class)")
                 .define("Suspicious Blocks Break On Fall", true);
+
         SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE = BUILDER
                 .comment("Required Fall Distance for Suspicious Blocks to break on fall if Suspicious Blocks Break On Fall = true, Jumping of 1 block = 2.1")
                 .defineInRange("Suspicious Blocks Break Fall Distance", 2.2, 0.0, 256.0);
+
+        CAN_FALL_DAMAGE_KILL_THE_PLAYER = BUILDER
+                .comment("Can the player die to fall damage? If no change the 'Health After Lethal Fall' config value")
+                .define("Can Fall Damage Kill The Player", true);
+
+        PLAYER_HEALTH_AFTER_LETHAL_FALL = BUILDER
+                .comment("Requires 'Can Fall Damage Kill The Player' to be set to false")
+                .defineInRange("Health After Lethal Fall", 1D, 1D, 20D);
 
 
         BUILDER.pop();
