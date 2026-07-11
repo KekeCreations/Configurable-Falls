@@ -3,7 +3,9 @@
   "minVersion": "0.8",
   "package": "com.kekecreations.break_my_fall.core.mixin",
   "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "mixins": [
+    "FabricEntityMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {

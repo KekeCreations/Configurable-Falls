@@ -2,10 +2,12 @@ package com.kekecreations.break_my_fall;
 
 
 import com.kekecreations.break_my_fall.core.config.BreakMyFallCommonConfig;
+import com.kekecreations.break_my_fall.core.event.KekeFallEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(BreakMyFall.MOD_ID)
 public class BreakMyFallNeoForge {
@@ -14,5 +16,6 @@ public class BreakMyFallNeoForge {
         modContainer.registerConfig(ModConfig.Type.COMMON, BreakMyFallCommonConfig.SPEC);
         BreakMyFall.init();
 
+        NeoForge.EVENT_BUS.addListener(KekeFallEvent::onFall);
     }
 }

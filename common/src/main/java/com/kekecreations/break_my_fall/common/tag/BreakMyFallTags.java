@@ -31,6 +31,9 @@ public class BreakMyFallTags {
         public static final TagKey<Block> MELON_BLOCKS
                 = tag("melon_blocks");
 
+        public static final TagKey<Block> TALL_FLOWERS
+                = tag("tall_flowers");
+
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BreakMyFall.MOD_ID, name));
         }

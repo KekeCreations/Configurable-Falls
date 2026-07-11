@@ -1,3 +1,13 @@
+### V1.0.2
+- Ported all features from 1.21.1 to 26.1.2
+- Changed Configurable Falls Tags class to Break My Falls Tags
+- Updated config to display correct tags
+- Added tall flowers tag because Minecraft removed theirs
+- Fixed water fall damage killing the player when lethal fall damage was turned off
+- Fixed The player dying despite having no lethal fall damage turned on
+
+
+
 ### V1.0.1
 - All mixin methods now use the correct mod ID
 - Added a new feature where the player doesn't die to lethal fall damage, you can control what health the player is left with!
