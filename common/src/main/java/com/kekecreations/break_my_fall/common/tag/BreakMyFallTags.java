@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
-public class ConfigurableFallsTags {
+public class BreakMyFallTags {
 
     public static class BlockTags {
 

@@ -28,7 +28,7 @@ public class LivingEntityMixin {
         LivingEntity $this = (LivingEntity) (Object) this;
         if (!BreakMyFallCommonConfig.CAN_FALL_DAMAGE_KILL_THE_PLAYER.get()) {
             if ($this instanceof Player player) {
-                if (calculateFallDamage(fallDistance, multiplier) >= player.getMaxHealth()) {
+                if (calculateFallDamage(fallDistance, multiplier) >= player.getHealth()) {
                     player.setHealth((BreakMyFallCommonConfig.PLAYER_HEALTH_AFTER_LETHAL_FALL.get().floatValue()));
 
                     int i = Mth.floor($this.getX());

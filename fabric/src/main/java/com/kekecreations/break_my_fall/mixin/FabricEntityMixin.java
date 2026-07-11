@@ -1,6 +1,6 @@
 package com.kekecreations.break_my_fall.mixin;
 
-import com.kekecreations.break_my_fall.common.tag.ConfigurableFallsTags;
+import com.kekecreations.break_my_fall.common.tag.BreakMyFallTags;
 import com.kekecreations.break_my_fall.core.config.BreakMyFallCommonConfig;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ public class FabricEntityMixin {
 
         if (!entity.level().isClientSide() && entity.onGround() && (!(entity instanceof Player) || (entity instanceof Player player && !player.isCreative() && !player.isSpectator()))) {
             //Ice
-            if (entity.fallDistance >= BreakMyFallCommonConfig.ICE_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.ICE_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.ICE)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.ICE_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.ICE_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.ICE)) {
                 entity.level().destroyBlock(blockPos, true, entity);
             }
             //Glass
@@ -41,18 +41,18 @@ public class FabricEntityMixin {
             }
 
             //Snow
-            if (entity.fallDistance >= BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(ConfigurableFallsTags.BlockTags.SNOW)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.SNOW)) {
                 entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.SNOW_BREAK_ON_FALL_DROPS.get(), entity);
             }
 
             //Grass
-            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(ConfigurableFallsTags.BlockTags.GRASS)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.GRASS)) {
                 entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.GRASS_BREAK_ON_FALL_DROPS.get(), entity);
             }
-            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.GRASS_BLOCKS)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.GRASS_TURNS_TO_DIRT_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.GRASS_BLOCKS)) {
                 entity.level().setBlock(blockPos, Blocks.DIRT.defaultBlockState(), 3);
             }
-            if (entity.fallDistance >= BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(ConfigurableFallsTags.BlockTags.TALL_GRASS)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL.get() && entity.level().getBlockState(layerPos).is(BreakMyFallTags.BlockTags.TALL_GRASS)) {
                 entity.level().destroyBlock(layerPos, BreakMyFallCommonConfig.TALL_GRASS_BREAK_ON_FALL_DROPS.get(), entity);
             }
             //FLOWERS
@@ -71,7 +71,7 @@ public class FabricEntityMixin {
 
 
             //ETC
-            if (entity.fallDistance >= BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.MELON_BLOCKS)) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.MELON_EXPLODE_INTO_SLICES_ON_FALL.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.MELON_BLOCKS)) {
                 entity.level().destroyBlock(blockPos, true, entity);
             }
             if (entity.fallDistance >= BreakMyFallCommonConfig.SUS_BLOCKS_BREAK_ON_FALL_FALL_DISTANCE.get() && BreakMyFallCommonConfig.SUS_BLOCKS_BREAK_ON_FALL.get() && entity.level().getBlockState(blockPos).getBlock() instanceof BrushableBlock) {
@@ -80,7 +80,7 @@ public class FabricEntityMixin {
 
 
             //TAGS
-            if (entity.fallDistance >= BreakMyFallCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(ConfigurableFallsTags.BlockTags.FRAGILE) && entity.level().getBlockState(blockPos).getBlock() != Blocks.AIR) {
+            if (entity.fallDistance >= BreakMyFallCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_FALL_DISTANCE.get() && entity.level().getBlockState(blockPos).is(BreakMyFallTags.BlockTags.FRAGILE) && entity.level().getBlockState(blockPos).getBlock() != Blocks.AIR) {
                 entity.level().destroyBlock(blockPos, BreakMyFallCommonConfig.CONFIGURABLE_FALLS_FRAGILE_BREAK_ON_FALL_DROPS.get(), entity);
             }
         }

@@ -1,6 +1,6 @@
 package com.kekecreations.break_my_fall;
 
-import com.kekecreations.break_my_fall.common.tag.ConfigurableFallsTags;
+import com.kekecreations.break_my_fall.common.tag.BreakMyFallTags;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ public class BreakMyFall {
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
     public static void init() {
-        ConfigurableFallsTags.BlockTags.registerBlockTags();
-        ConfigurableFallsTags.FluidTags.registerFluidTags();
+        BreakMyFallTags.BlockTags.registerBlockTags();
+        BreakMyFallTags.FluidTags.registerFluidTags();
     }
 }
