@@ -1,4 +1,4 @@
-package com.kekecreations.break_my_fall.platform;
+package com.kekecreations.break_my_fall.core.platform;
 
 import com.kekecreations.break_my_fall.core.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
@@ -21,6 +21,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
 
-        return !FMLLoader.isProduction();
+        return !FMLLoader.getCurrent().isProduction();
     }
 }

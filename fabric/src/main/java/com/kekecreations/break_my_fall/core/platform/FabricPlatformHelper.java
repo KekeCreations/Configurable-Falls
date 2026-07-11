@@ -1,4 +1,4 @@
-package com.kekecreations.break_my_fall.platform;
+package com.kekecreations.break_my_fall.core.platform;
 
 import com.kekecreations.break_my_fall.core.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
